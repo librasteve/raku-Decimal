@@ -1,32 +1,32 @@
-unit class Decimal;
+use MONKEY-TYPING;
+
+class Decimal is Rat {
+    has $.rat handles(*);
+
+    #places right or left of decimal point
+    has $.right = 2;
+    has $.left = 16;
+
+    has $.round-mode = 'bankers';
+
+    method Numeric { $!rat }
+
+    method this-is-c { say 'yo' }
+}
 
 
-=begin pod
+augment class FatRat {
+    method Decimal { Decimal.new(:rat(self.Rat))}
+}
 
-=head1 NAME
+augment class Rat {
+    method Decimal { Decimal.new(:rat(self.Rat))}
+}
 
-Decimal - blah blah blah
+augment class Int {
+    method Decimal { Decimal.new(:rat(self.Rat))}
+}
 
-=head1 SYNOPSIS
 
-=begin code :lang<raku>
 
-use Decimal;
 
-=end code
-
-=head1 DESCRIPTION
-
-Decimal is ...
-
-=head1 AUTHOR
-
-librasteve <librasteve@furnival.net>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2024 librasteve
-
-This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
-
-=end pod
